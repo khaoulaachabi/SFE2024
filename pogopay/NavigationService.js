@@ -1,22 +1,22 @@
-// import { CommonActions } from '@react-navigation/native';
+import { CommonActions } from '@react-navigation/native';
 
-// let navigator;
+let navigator;
 
-// function setTopLevelNavigator(ref) {
-//   navigator = ref;
-// }
+function setTopLevelNavigator(ref) {
+  navigator = ref;
+}
 
-// function navigate(routeName, params) {
-//   navigator.dispatch(
-//     CommonActions.navigate({
-//       name: routeName,
-//       params,
-//     })
-//   );
-// }
+function navigate(routeName, params) {
+  navigator.dispatch(
+    CommonActions.navigate({
+      name: routeName,
+      params,
+    })
+  );
+}
 
 
-// export default {
-//   navigate,
-//   setTopLevelNavigator,
-// };
+export default {
+  navigate,
+  setTopLevelNavigator,
+};
