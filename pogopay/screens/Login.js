@@ -1,18 +1,11 @@
+// Updated code for Login component
 import React, { useState } from 'react';
 import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 
-
 const Login = () => {
     const navigation = useNavigation();
-  
-    const handleSignInPress = () => {
-      navigation.navigate('Signup');
-    };
-    const handleForgotInPress = () => {
-        navigation.navigate('Forgot');
-      };
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [hidePassword, setHidePassword] = useState(true);
@@ -21,11 +14,18 @@ const Login = () => {
         setHidePassword(!hidePassword);
     };
 
+    const handleSignInPress = () => {
+        navigation.navigate('Signup');
+    };
+
+    const handleForgotInPress = () => {
+        navigation.navigate('Forgot');
+    };
+
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Login In</Text>
-            <Text style={styles.t1}>Set a name for your profile, here's</Text>
-            <Text style={styles.t2}>the password</Text>
+            <Text style={styles.subtitle}>Set a name for your profile, here's the password</Text>
             <Image style={styles.image} source={require('../assets/login.jpg')} />
             <View style={styles.inputContainer}>
                 <TextInput
@@ -33,8 +33,10 @@ const Login = () => {
                     placeholder="Name"
                     autoCapitalize="words"
                     onChangeText={text => setName(text)}
+                    accessibilityLabel="Enter your name"
                 />
-                <View style={styles.passwordInputContainer}>
+             
+               <View style={styles.passwordInputContainer}>
                     <TextInput
                         style={[styles.input, styles.passwordInput]}
                         placeholder="Password"
@@ -54,20 +56,18 @@ const Login = () => {
                     </TouchableOpacity>
                     
                 </View>
-                <TouchableOpacity onPress={handleForgotInPress}  >
-                <Text style={styles.t5}>Forgot password?</Text>
-            </TouchableOpacity>                
+                <TouchableOpacity style={styles.forgotPasswordLinkContainer} onPress={handleForgotInPress}>
+                    <Text style={styles.forgotPasswordLink}>Forgot password?</Text>
+                </TouchableOpacity>
             </View>
-            <TouchableOpacity style={styles.button} >
+                
+        
+            <TouchableOpacity style={styles.button} onPress={handleSignInPress}>
                 <Text style={styles.buttonText}>Log In</Text>
             </TouchableOpacity>
-            <Text style={styles.t3}>Don’t have an account?</Text>
-            <TouchableOpacity onPress={handleSignInPress}  >
-                <Text style={styles.t4}>Sign up</Text>
-            </TouchableOpacity>
+            <Text style={styles.bottomText}>Don't have an account? <Text style={styles.signupLink} onPress={handleSignInPress}>Sign up</Text></Text>
         </View>
     );
-
 }
 
 const { width, height } = Dimensions.get('window');
@@ -77,88 +77,87 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         flex: 1,
         alignItems: 'center',
+        padding: 20,
     },
     text: {
-        fontWeight: "bold",
-        fontSize: 20,
-        color: "#011A51",
-        marginTop: 75,
+        fontWeight: 'bold',
+        fontSize: 24,
+        color: '#011A51',
+        marginTop: 40,
+    },
+    subtitle: {
+        fontSize: 14,
+        color: '#727E96',
+        marginTop: 20,
     },
     image: {
         width: '60%',
         height: 180,
-        marginTop: 80,
+        marginTop: 40,
     },
-    t1: {
-        fontSize: 11,
-        fontWeight: "bold",
-        color: '#727E96',
-        marginTop: 20,
+    inputContainer: {
+        width: '100%',
+        marginBottom: 30,
     },
-    t2: {
-        fontSize: 11,
-        color: '#727E96',
-        fontWeight: "bold",
+    input: {
+        width: '100%',
+        height: 50,
+        borderWidth: 1,
+        borderColor: '#042552',
+        borderRadius: 10,
+        paddingLeft: 20,
+        marginBottom: 40,
+        top:36
+    },
+    togglePassword: {
+        textAlign: 'right',
+        color: '#03D3B9',
+    },
+   
+   
+    forgotPasswordLinkContainer: {
+        alignSelf: 'flex-end',
+    },
+    forgotPasswordLink: {
+        color: '#FB847C',
+        textDecorationLine: 'underline',
+        fontSize: 14,
     },
     button: {
-        width: '60%',
-        height: 52,
+        width: '100%',
+        height: 50,
         backgroundColor: '#FB847C',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 6,
+        borderRadius: 10,
         marginTop: 20,
     },
     buttonText: {
-        color: "white",
-        fontSize: 19,
+        color: 'white',
+        fontSize: 18,
         fontWeight: 'bold',
     },
-    inputContainer: {
-        marginTop: 50,
+    bottomText: {
+        marginTop: 20,
+        fontSize: 14,
+        color: '#727E96',
     },
-    input: {
-        width: width * 0.76,
-        height: height * 0.06,
-        borderWidth: 1,
-        borderColor: '#042552',
-        borderRadius: width * 0.03,
-        paddingLeft: width * 0.02,
-        marginBottom: height * 0.05,
-        backgroundColor: '#EFF2F4',
+    signupLink: {
+        color: '#FB847C',
+        textDecorationLine: 'underline',
     },
     passwordInputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
     },
     passwordInput: {
-        paddingRight: 40, // Adjust paddingRight to leave space for the icon
+        paddingRight: 40, 
     },
     icon: {
         position: 'absolute',
         right: 19,
-        top: '30%',
+        top: '68%',
         transform: [{ translateY: -10 }],
-    },
-    t3: {
-        fontSize: 11,
-        color: '#727E96',
-        fontWeight: "bold",
-    },
-    t4: {
-        fontSize: 11,
-        color: '#FB847C',
-        fontWeight: "bold",
-        textDecorationLine:'underline',
-        
-    },
-    t5: {
-        fontSize: 10,
-        color: '#FB847C',
-        fontWeight: "bold",
-        textDecorationLine:'underline',
-        top:-37,
-        left:210
     },
 });
 

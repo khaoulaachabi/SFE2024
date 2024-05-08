@@ -42,6 +42,8 @@ const App = () => {
         <Stack.Screen name="CODE QR" component={CodeQr} options={{ headerShown: false, gestureEnabled: false }} />
         <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false, gestureEnabled: false }} />
         <Stack.Screen name="Transactions History" component={History} options={{ headerShown: false, gestureEnabled: false }} />
+        <Stack.Screen name="Reset" component={Reset} options={{ headerShown: false, gestureEnabled: false }} />
+
 
 
       </Stack.Navigator>

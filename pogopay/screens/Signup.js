@@ -1,57 +1,87 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 const Signup = () => {
     const navigation = useNavigation();
-  
-  const handleSignInPress = () => {
-    navigation.navigate('login');
-  };
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [hidePassword, setHidePassword] = useState(true);
+
+    
+    const togglePasswordVisibility = () => {
+        setHidePassword(!hidePassword);
+    };
+
+    const handleSignInPress = () => {
+        navigation.navigate('login');
+    };
+
+    const isValidEmail = (email) => {
+        // Add email validation logic here
+        return true;
+    };
 
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Sign up</Text>
-            <Text style={styles.t1}>Set a name for your profile, here's </Text>
-            <Text style={styles.t2}>the password</Text>
+            <Text style={styles.subText}>Set a name for your profile, here's the password</Text>
             <Image style={styles.image} source={require('../assets/sign up.png')} />
             <View style={styles.inputContainer}>
                 <TextInput
-                    style={styles.input} // Adjust width here
+                    style={styles.input}
                     placeholder="Name"
                     autoCapitalize="words"
                     onChangeText={text => setName(text)}
+                    accessibilityLabel="Enter your name"
                 />
                 <TextInput
-                   style={styles.input} // Adjust width here
+                    style={styles.input}
                     placeholder="Email"
                     autoCapitalize="none"
                     keyboardType="email-address"
                     onChangeText={text => setEmail(text)}
+                    onBlur={() => {
+                        if (!isValidEmail(email)) {
+                            // Show error message or change style to indicate error
+                        }
+                    }}
+                    accessibilityLabel="Enter your email"
                 />
-                <TextInput
-                    style={styles.input} // Adjust width here
-                    placeholder="Password"
-                    autoCapitalize="none"
-                    secureTextEntry={true}
-                    onChangeText={text => setPassword(text)}
-                />
+               <View style={styles.passwordInputContainer}>
+                    <TextInput
+                        style={[styles.input, styles.passwordInput]}
+                        placeholder="Password"
+                        autoCapitalize="none"
+                        secureTextEntry={hidePassword}
+                        onChangeText={text => setPassword(text)}
+                    />
+                    <TouchableOpacity
+                        style={styles.icon}
+                        onPress={togglePasswordVisibility}
+                    >
+                        <Icon
+                            name={hidePassword ? 'eye-slash' : 'eye'}
+                            size={20}
+                            color="#000"
+                        />
+                    </TouchableOpacity>
+                    
+                </View>
+                {/* <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                    <Text style={styles.togglePassword}>{showPassword ? 'Hide' : 'Show'} Password</Text>
+                </TouchableOpacity> */}
             </View>
-            <TouchableOpacity style={styles.button} >
+            <TouchableOpacity style={styles.button} onPress={handleSignInPress}>
                 <Text style={styles.buttonText}>SIGN UP</Text>
             </TouchableOpacity>
-            <Text style={styles.t3}>Already have an account?</Text>
-            <TouchableOpacity onPress={handleSignInPress}  >
-                <Text style={styles.t4}>Log in</Text>
-            </TouchableOpacity>
+            <Text style={styles.bottomText}>Already have an account? <Text style={styles.loginLink} onPress={handleSignInPress}>Log in</Text></Text>
         </View>
     );
-
-} 
+}
 
 const { width, height } = Dimensions.get('window');
 
@@ -60,66 +90,77 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         flex: 1,
         alignItems: 'center',
+        paddingTop: 60,
+        paddingHorizontal: 20,
     },
     text: {
         fontWeight: "bold",
-        fontSize: 20,
+        fontSize: 24,
         color: "#011A51",
-        marginTop: 75,
+        marginBottom: 10,
+    },
+    subText: {
+        fontSize: 16,
+        color: '#727E96',
+        marginBottom: 20,
+        textAlign: 'center',
     },
     image: {
         width: '60%',
         height: 180,
-        marginTop: 80,
+        marginBottom: 40,
     },
-    t1: {
-        fontSize: 11,
-        fontWeight: "bold",
-        color: '#727E96',
-        marginTop: 20,
+    inputContainer: {
+        width: '100%',
+        marginBottom: 30,
     },
-    t2: {
-        fontSize: 11,
-        color: '#727E96',
-        fontWeight: "bold",
+    input: {
+        width: '100%',
+        height: 50,
+        borderWidth: 1,
+        borderColor: '#042552',
+        borderRadius: 10,
+        paddingLeft: 20,
+        marginBottom: 20,
     },
-    t3: {
-        fontSize: 11,
-        color: '#727E96',
-        fontWeight: "bold",
-    },
-    t4: {
-        fontSize: 11,
-        color: '#FB847C',
-        fontWeight: "bold",
-        textDecorationLine:'underline'
+    togglePassword: {
+        textAlign: 'right',
+        color: '#03D3B9',
     },
     button: {
-        width: '60%',
+        width: '100%',
         height: 52,
         backgroundColor: '#FB847C',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 6,
-        marginTop: 20,
+        borderRadius: 10,
     },
     buttonText: {
         color: "white",
-        fontSize: 19,
+        fontSize: 18,
         fontWeight: 'bold',
     },
-    inputContainer: {
-        marginTop: 50,
+    bottomText: {
+        fontSize: 16,
+        color: '#727E96',
+        textAlign: 'center',
     },
-    input: {
-        width: width * 0.76,
-        height: height * 0.06,
-        borderWidth: 1,
-        borderColor: '#042552',
-        borderRadius: width * 0.03,
-        paddingLeft: width * 0.02,
-        marginBottom: height * 0.05,
-        backgroundColor: '#EFF2F4',
+    loginLink: {
+        color: '#FB847C',
+        textDecorationLine:'underline',
+    },
+    passwordInputContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    passwordInput: {
+        paddingRight: 40, 
+    },
+    icon: {
+        position: 'absolute',
+        right: 19,
+        top: '35%',
+        transform: [{ translateY: -10 }],
     },
 });
 

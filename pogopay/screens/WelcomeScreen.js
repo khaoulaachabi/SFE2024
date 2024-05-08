@@ -8,7 +8,7 @@ const WelcomeScreen =()=>{
   const navigation = useNavigation();
   
   const handleSignInPress = () => {
-    navigation.navigate('Register');
+    navigation.navigate('Home');
   };
 
     return(

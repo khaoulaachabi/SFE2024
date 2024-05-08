@@ -1,115 +1,88 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Dimensions } from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableOpacity, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
+import { OtpInput } from 'react-native-otp-entry';
 
 const CodeScreen = () => {
-  const navigation = useNavigation();
+    const [otp, setOtp] = useState('');
+    const navigation = useNavigation();
   
-  const handleSignInPress = () => {
-    navigation.navigate('Signup');
-  };
+    const handleSignInPress = () => {
+        navigation.navigate('Signup');
+    };
+
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Enter Code</Text>
-            <Text style={styles.t1}>Enter the 6-digit verification sent to</Text>
-            <Text style={styles.t2}>+707429663</Text>
+            <Text style={styles.text}>Enter Verification Code</Text>
+            <Text style={styles.subText}>Enter the 6-digit code sent to</Text>
+            <Text style={styles.phoneNumber}>+707429663</Text>
             <Image style={styles.image} source={require('../assets/code.png')} />
-            <View style={styles.inputContainer}>
-                <TextInput
-                    style={[styles.input, {width: '20%'}]} 
-                    placeholder=""
-                    autoCapitalize="none"
-                    keyboardType="number-pad" 
-                    placeholderTextColor="#000000"
-                />
-                <TextInput
-                    style={[styles.input, {width: '20%'}]} 
-                    placeholder=""
-                    autoCapitalize="none"
-                    keyboardType="number-pad" 
-                    placeholderTextColor="#000000"
-                />
-                <TextInput
-                    style={[styles.input, {width: '20%'}]} 
-                    placeholder=""
-                    autoCapitalize="none"
-                    keyboardType="number-pad" 
-                    placeholderTextColor="#000000"
-                />
-                <TextInput
-                    style={[styles.input, {width: '20%'}]} 
-                    placeholder=""
-                    autoCapitalize="none"
-                    keyboardType="number-pad" 
-                    placeholderTextColor="#000000"
-                />
-               
-            </View>
-            <TouchableOpacity style={styles.button} onPress={handleSignInPress} >
+            <OtpInput
+                numberOfDigits={6}
+                autoFocus
+                onChange={(code) => setOtp(code)}
+                otp={otp}
+                otpType="number"
+                tintColor="#03D3B9"
+                offTintColor="#727E96"
+                secureTextEntry={false}
+                style={styles.otpInput}
+            />
+            <TouchableOpacity style={styles.button} onPress={handleSignInPress}>
                 <Text style={styles.buttonText}>CONTINUE</Text>
             </TouchableOpacity>
         </View>
     );
-
 }
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#FFFFFF',
         flex: 1,
         alignItems: 'center',
+        padding: 20,
     },
     text: {
-        fontWeight: "bold",
-        fontSize: 20,
-        color: "#011A51",
-        marginTop: 75,
+        fontWeight: 'bold',
+        fontSize: 24,
+        color: '#011A51',
+        marginTop: 40,
+    },
+    subText: {
+        fontSize: 14,
+        color: '#727E96',
+        marginTop: 10,
+    },
+    phoneNumber: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#011A51',
     },
     image: {
         width: '60%',
         height: 180,
-        marginTop: 80,
-    },
-    t1: {
-        fontSize: 11,
-        fontWeight: "bold",
-        color: '#727E96',
         marginTop: 20,
     },
-    t2: {
-        fontSize: 11,
-        color: '#727E96',
-        fontWeight: "bold",
+    otpInput: {
+        marginTop: 40,
+        width: '80%',
+        alignSelf: 'center',
     },
     button: {
-        width: '60%',
+        width: '80%',
         height: 52,
         backgroundColor: '#03D3B9',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 6,
-        marginTop: 60,
+        marginTop: 40,
     },
     buttonText: {
-        color: "white",
-        fontSize: 19,
+        color: 'white',
+        fontSize: 18,
         fontWeight: 'bold',
-    },
-    inputContainer: {
-        flexDirection: 'row',
-        marginTop: 50,
-    },
-    input: {
-        height: height * 0.06,
-        borderWidth: 1,
-        borderColor: '#042552',
-        borderRadius: width * 0.03,
-        paddingLeft: width * 0.02,
-        marginRight: 10,
-        backgroundColor: '#EFF2F4',
     },
 });
 
