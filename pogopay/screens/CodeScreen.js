@@ -13,37 +13,38 @@ const CodeScreen = () => {
         <View style={styles.container}>
             <Text style={styles.text}>Enter Code</Text>
             <Text style={styles.t1}>Enter the 6-digit verification sent to</Text>
-            <Text style={styles.t2}>+62852000342</Text>
+            <Text style={styles.t2}>+707429663</Text>
             <Image style={styles.image} source={require('../assets/code.png')} />
             <View style={styles.inputContainer}>
                 <TextInput
-                    style={[styles.input, {width: '20%'}]} // Adjust width here
+                    style={[styles.input, {width: '20%'}]} 
                     placeholder=""
                     autoCapitalize="none"
-                    keyboardType="number-pad" // Numeric keyboard for verification code
+                    keyboardType="number-pad" 
                     placeholderTextColor="#000000"
                 />
                 <TextInput
-                    style={[styles.input, {width: '20%'}]} // Adjust width here
+                    style={[styles.input, {width: '20%'}]} 
                     placeholder=""
                     autoCapitalize="none"
-                    keyboardType="number-pad" // Numeric keyboard for verification code
+                    keyboardType="number-pad" 
                     placeholderTextColor="#000000"
                 />
                 <TextInput
-                    style={[styles.input, {width: '20%'}]} // Adjust width here
+                    style={[styles.input, {width: '20%'}]} 
                     placeholder=""
                     autoCapitalize="none"
-                    keyboardType="number-pad" // Numeric keyboard for verification code
+                    keyboardType="number-pad" 
                     placeholderTextColor="#000000"
                 />
                 <TextInput
-                    style={[styles.input, {width: '20%'}]} // Adjust width here
+                    style={[styles.input, {width: '20%'}]} 
                     placeholder=""
                     autoCapitalize="none"
-                    keyboardType="number-pad" // Numeric keyboard for verification code
+                    keyboardType="number-pad" 
                     placeholderTextColor="#000000"
                 />
+               
             </View>
             <TouchableOpacity style={styles.button} onPress={handleSignInPress} >
                 <Text style={styles.buttonText}>CONTINUE</Text>
