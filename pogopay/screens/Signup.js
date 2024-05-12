@@ -71,9 +71,7 @@ const Signup = () => {
                     </TouchableOpacity>
                     
                 </View>
-                {/* <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-                    <Text style={styles.togglePassword}>{showPassword ? 'Hide' : 'Show'} Password</Text>
-                </TouchableOpacity> */}
+              
             </View>
             <TouchableOpacity style={styles.button} onPress={handleSignInPress}>
                 <Text style={styles.buttonText}>SIGN UP</Text>

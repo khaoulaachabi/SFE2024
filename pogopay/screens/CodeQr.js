@@ -3,7 +3,6 @@ import { View, Button } from 'react-native';
 
 const CodeQr = ({ navigation }) => {
   const navigateToDetails = () => {
-    // Navigate to the Details screen
     navigation.navigate('Details');
   };
 

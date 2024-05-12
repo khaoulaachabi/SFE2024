@@ -15,8 +15,8 @@ import HomeScreen from './screens/HomeScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CodeQr from './screens/CodeQr';
 import Profile from './screens/Profile';
-import History from './screens/History';
-
+import Transactions from './screens/Transactions'
+import Transfer from './screens/Transfer';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator(); // Create a TabNavigator
 
@@ -41,8 +41,10 @@ const App = () => {
         <Stack.Screen name="Home" component={HomeTabNavigator} options={{ headerShown: false, gestureEnabled: false }} />
         <Stack.Screen name="CODE QR" component={CodeQr} options={{ headerShown: false, gestureEnabled: false }} />
         <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false, gestureEnabled: false }} />
-        <Stack.Screen name="Transactions History" component={History} options={{ headerShown: false, gestureEnabled: false }} />
+        <Stack.Screen name="Transaction History" component={Transactions} options={{ headerShown: false, gestureEnabled: false }} />
         <Stack.Screen name="Reset" component={Reset} options={{ headerShown: false, gestureEnabled: false }} />
+        <Stack.Screen name="Transfer" component={Transfer} options={{ headerShown: false, gestureEnabled: false }} />
+
 
 
 
@@ -66,8 +68,9 @@ const HomeTabNavigator = () => {
         } else if (route.name === 'Profile') {
           iconName = 'user';
         } 
-        else if (route.name === 'History') {
-          iconName = 'history';
+        else if (route.name === 'Transactions') {
+          iconName = 'exchange'; // Or any other suitable icon name
+        
         } 
 
         // Define the color for focused and unfocused states
@@ -84,7 +87,7 @@ const HomeTabNavigator = () => {
   >
     <Tab.Screen name="Home" component={HomeScreen} />
     <Tab.Screen name="CODE QR" component={CodeQr} />
-    <Tab.Screen name="History" component={History} />
+    <Tab.Screen name="Transactions" component={Transactions} />
     <Tab.Screen name="Profile" component={Profile} />
 
     {/* Add other tabs as needed */}

@@ -31,8 +31,6 @@ const styles = StyleSheet.create({
     container:{
         backgroundColor:'#03D3B9',
         flex: 1,
-        // justifyContent: 'center',
-        // alignItems: 'center',
     },
     text: {
         fontWeight: "bold",
