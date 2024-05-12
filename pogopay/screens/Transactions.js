@@ -14,7 +14,6 @@ const TransactionsHistory = () => {
     { id: '7', type: 'Deposit', date: 'April 28, 2024', amount: '$50.00' },
     { id: '8', type: 'Withdrawal', date: 'April 25, 2024', amount: '$30.00' },
     { id: '9', type: 'Purchase', date: 'April 20, 2024', amount: '$15.00' },
-    { id: '0', type: 'Deposit', date: 'April 18, 2024', amount: '$100.00' },
   ];
 
   return (

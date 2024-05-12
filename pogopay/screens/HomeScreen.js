@@ -21,12 +21,17 @@ const HomeScreen = () => {
   const handleTransferMoney = () => {
     navigation.navigate('Transfer');
   
+
+  };
+  const handleAddCard = () => {
+    navigation.navigate('Credit');
+  
   };
   return (
     <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
       <View style={styles.profileContainer}>
         <Image
-          source={require('../assets/user1.png')} // Placeholder profile image
+          source={require('../assets/user1.png')} 
           style={styles.profileImage}
         />
         <Text style={styles.userName}>John Doe</Text>
@@ -62,9 +67,14 @@ const HomeScreen = () => {
           keyExtractor={(item) => item.id}
         />
       </View>
-      <TouchableOpacity style={styles.transferButton} onPress={ handleTransferMoney}>
-        <Text style={styles.transferButtonText}>Transfer Money</Text>
-      </TouchableOpacity>
+      <View style={styles.buttonContainer}>
+  <TouchableOpacity style={styles.transferButton} onPress={handleTransferMoney}>
+    <Text style={styles.transferButtonText}>Transfer Money</Text>
+  </TouchableOpacity>
+  <TouchableOpacity style={styles.creditButton} onPress={handleAddCard}>
+    <Text style={styles.creditButtonText}>My Credit Cards</Text>
+  </TouchableOpacity>
+</View>
     </ScrollView>
   );
 };
@@ -90,20 +100,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  transferButton: {
-    backgroundColor: '#03D3B9',
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-    marginBottom: 20,
-    alignItems: 'center',
-    top:20
-  },
-  transferButtonText: {
-    color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
+  
   balanceCard: {
     backgroundColor: '#EFF2F4',
     borderRadius: 10,
@@ -178,6 +175,39 @@ const styles = StyleSheet.create({
   quickActions: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20, // Adjust as needed
+  },
+  transferButton: {
+    backgroundColor: '#03D3B9',
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    flex: 1, // Added
+    marginRight: 10, // Added
+  },
+  transferButtonText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center', // Added
+  },
+  creditButton: {
+    backgroundColor: '#03D3B9',
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    flex: 1, // Added
+    marginLeft: 10, // Added
+  },
+  creditButtonText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center', // Added
   },
 });
 

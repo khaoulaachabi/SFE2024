@@ -17,6 +17,7 @@ import CodeQr from './screens/CodeQr';
 import Profile from './screens/Profile';
 import Transactions from './screens/Transactions'
 import Transfer from './screens/Transfer';
+import CreditCard from './screens/CreditCard'
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator(); // Create a TabNavigator
 
@@ -44,6 +45,9 @@ const App = () => {
         <Stack.Screen name="Transaction History" component={Transactions} options={{ headerShown: false, gestureEnabled: false }} />
         <Stack.Screen name="Reset" component={Reset} options={{ headerShown: false, gestureEnabled: false }} />
         <Stack.Screen name="Transfer" component={Transfer} options={{ headerShown: false, gestureEnabled: false }} />
+        <Stack.Screen name="Credit" component={CreditCard} options={{ headerShown: false, gestureEnabled: false }} />
+
+
 
 
 
