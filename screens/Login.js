@@ -15,7 +15,7 @@ const Login = () => {
     };
 
     const handleSignInPress = () => {
-        navigation.navigate('Home');
+        navigation.navigate('home');
     };
     const handleSign = () => {
         navigation.navigate('Signup');

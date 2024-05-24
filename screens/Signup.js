@@ -2,27 +2,42 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import PhoneInput from 'react-native-phone-number-input';
 
 const Signup = () => {
     const navigation = useNavigation();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [address, setAddress] = useState('');
     const [password, setPassword] = useState('');
     const [hidePassword, setHidePassword] = useState(true);
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [formattedValue, setFormattedValue] = useState('');
 
-    
     const togglePasswordVisibility = () => {
         setHidePassword(!hidePassword);
     };
 
     const handleSignInPress = () => {
-        navigation.navigate('login');
+        navigation.navigate('Login');
+    };
+
+    const handleSignUpPress = () => {
+        // Implement your signup logic here
+        // You can send data to your server or Firebase
+        console.log({
+            name,
+            phoneNumber: formattedValue,
+            email,
+            address,
+            password
+        });
+        navigation.navigate('Login'); // Navigate to Home or other screen after successful signup
     };
 
     const isValidEmail = (email) => {
-        // Add email validation logic here
-        return true;
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
     };
 
     return (
@@ -38,6 +53,17 @@ const Signup = () => {
                     onChangeText={text => setName(text)}
                     accessibilityLabel="Enter your name"
                 />
+                <PhoneInput
+                    defaultCode='MA'
+                    placeholder='mobile number'
+                    value={phoneNumber}
+                    onChangeText={(text) => setPhoneNumber(text)}
+                    onChangeFormattedText={(text) => setFormattedValue(text)}
+                    containerStyle={styles.phoneInputContainer}
+                    textContainerStyle={styles.phoneInputTextContainer}
+                    textInputStyle={styles.phoneInputText}
+                    codeTextStyle={styles.phoneInputCodeText}
+                />
                 <TextInput
                     style={styles.input}
                     placeholder="Email"
@@ -46,12 +72,18 @@ const Signup = () => {
                     onChangeText={text => setEmail(text)}
                     onBlur={() => {
                         if (!isValidEmail(email)) {
-                            // Show error message or change style to indicate error
                         }
                     }}
                     accessibilityLabel="Enter your email"
                 />
-               <View style={styles.passwordInputContainer}>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Address"
+                    autoCapitalize="none"
+                    onChangeText={text => setAddress(text)}
+                    accessibilityLabel="Enter your address"
+                />
+                <View style={styles.passwordInputContainer}>
                     <TextInput
                         style={[styles.input, styles.passwordInput]}
                         placeholder="Password"
@@ -69,11 +101,9 @@ const Signup = () => {
                             color="#000"
                         />
                     </TouchableOpacity>
-                    
                 </View>
-              
             </View>
-            <TouchableOpacity style={styles.button} onPress={handleSignInPress}>
+            <TouchableOpacity style={styles.button} onPress={handleSignUpPress}>
                 <Text style={styles.buttonText}>SIGN UP</Text>
             </TouchableOpacity>
             <Text style={styles.bottomText}>Already have an account? <Text style={styles.loginLink} onPress={handleSignInPress}>Log in</Text></Text>
@@ -121,6 +151,27 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         marginBottom: 20,
     },
+    phoneInputContainer: {
+        width: '100%',
+        height: 50,
+        borderWidth: 1,
+        borderColor: '#042552',
+        borderRadius: 10,
+        marginBottom: 20,
+    },
+    phoneInputTextContainer: {
+        borderRadius: 10,
+        backgroundColor: '#FFFFFF',
+    },
+    phoneInputText: {
+        height: 48,
+        fontSize: 16,
+        
+    },
+    phoneInputCodeText: {
+        fontSize: 16,
+        top:-3
+    },
     togglePassword: {
         textAlign: 'right',
         color: '#03D3B9',
@@ -145,14 +196,14 @@ const styles = StyleSheet.create({
     },
     loginLink: {
         color: '#03D3B9',
-        textDecorationLine:'underline',
+        textDecorationLine: 'underline',
     },
     passwordInputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
     },
     passwordInput: {
-        paddingRight: 40, 
+        paddingRight: 40,
     },
     icon: {
         position: 'absolute',

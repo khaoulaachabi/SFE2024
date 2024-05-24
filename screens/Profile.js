@@ -20,7 +20,7 @@ const Profile = () => {
     navigation.navigate('About Us');
   };
   const handleLogout = () => {
-    navigation.navigate('login');
+    navigation.navigate('Login');
   
   };
 
